@@ -1,6 +1,6 @@
 # XPC Scanner
 
-This project enables good faith security researchers to investigate the iOS sandbox from different app perspectives. As sandbox profiles are huge in LOC, undocumented, and hard to debug with a compiler(which Apple does not ship for iOS), we build a tool set to investigate system services, aka daemons and XPC Services.
+This project enables good faith security researchers to investigate the iOS sandbox from different app perspectives. As sandbox profiles are huge in LOC, undocumented, and hard to debug with a compiler(which Apple does not ship for iOS), we build a tool set to investigate system services, aka daemons and XPC Services. Works on iOS 15.6 and tested with iOS 18.4 on an iPad. 
 
 ## Scripts
 
@@ -23,14 +23,6 @@ This project enables good faith security researchers to investigate the iOS sand
     - As entitlement values are context specific, use the commented out `this.shouldBypass` to replace with custom values.
 
 ## Usage
-
-### Service testing
-
-To test services names, load the scripts into the target process. It does not need to be freshly spawned with `-f`, `-n` also works.
-
-```shell
-frida -U -f "thesis.testetsttest" -l servicenames.js -l xpctest.js -o results.log
-```
 
 Afterwards, type in `evaluate_sandbox` to obtain results.
 
@@ -104,10 +96,15 @@ One should say `Launchd Sandbox bypass is OFF for process 1749` and one should s
 
 The `xpctest` can also be injected into other services. However, we don't need step 2) and 3) as exploring the service reachability once sufficient. 
 
+While playing with the contats app, I observed the lookup/register number `3` and `4825`
 
-# HASEL
-
-See folder HASEL
+```
+Contacts(4825): mach-register(Unknown(3)) -> com.apple.assistant.contextprovider.com.apple.MobileAddressBook => ACCEPT
+Contacts(4825): mach-lookup(Unknown(3)) -> com.apple.assistant.contextprovider.com.apple.MobileAddressBook => ACCEPT
+Contacts(4825): mach-register(Unknown(3)) -> com.apple.assistant.contextprovider.com.apple.MobileAddressBook => ACCEPT
+Contacts(4825): mach-lookup(UnkContacts(4825): mach-register(Unknown(3)) -> com.apple.assistant.contextprovider.com.apple.MobileAddressBook => ACCEPT
+nown(3)) -> com.apple.assistant.contextprovider.com.apple.MobileAddressBook => ACCEPT
+```
 
 # License
 
