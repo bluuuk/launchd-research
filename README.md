@@ -2,6 +2,8 @@
 
 This project enables good faith security researchers to investigate the iOS sandbox from different app perspectives. As sandbox profiles are huge in LOC, undocumented, and hard to debug with a compiler(which Apple does not ship for iOS), we build a tool set to investigate system services, aka daemons and XPC Services. Works on iOS 15.6 and tested with iOS 18.4 on an iPad. 
 
+Now also supports current frida version which introduced a new api.
+
 # Scripts
 
 - `launchd_get_out_of_my_way.js`

@@ -1,8 +1,10 @@
-const sandbox_check_by_audit_token_addr = Module.getExportByName(null, 'sandbox_check_by_audit_token');
-const sandbox_check = Module.getExportByName(null, 'sandbox_check');
+const sandbox = Process.getModuleByName("libsystem_sandbox.dylib");
+const mod = Process.getModuleByName("libSystem.B.dylib");
 
-const proc_name_addr = Module.getExportByName(null, 'proc_name');
-															// int pid, char *buf, int size
+const sandbox_check_by_audit_token_addr = sandbox.getExportByName('sandbox_check_by_audit_token');
+const sandbox_check = sandbox.getExportByName('sandbox_check');
+
+const proc_name_addr = mod.getExportByName('proc_name');
 const proc_name = new NativeFunction(proc_name_addr, 'void', ['uint32', 'pointer', 'uint32']); 
 /*
 	We cannot use Interceptor.replace as the native callback assumes a fixed number of arguments :/ 
